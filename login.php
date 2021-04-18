@@ -48,7 +48,7 @@ $conn = access_database_byname('DB_esercizio6');
               if (password_verify($password, $row['password'])) {
                   $_SESSION['user_auth'] = $username;
                   // header('Location: index.php');
-                  echo "<p>Benvenuto $username, <a href=\"index.php\">torna alla home page</a></p>";
+                  echo "<p>Benvenuto $username, <a href='index.php?message=0'>torna alla home page</a></p>";
               }
           } else {
               // echo '<p>Utente non trovato. <a href="/login.php">Riprova</a></p>';

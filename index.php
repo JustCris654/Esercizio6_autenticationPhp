@@ -15,6 +15,19 @@ if (!isset($_SESSION['user_auth'])) {
 
 <body>
   <?php
+  if(isset($_GET['message'])){
+    switch ($_GET['message']) {
+      case '0':
+        echo "<h4>Login avvenuto con successo</h4>";
+        break;
+      case '1':
+        echo "<h4>Logout eseguito</h4>";
+        break;
+      case '2':
+        echo "<h4>Benvenuto, ti sei appena registrato</h4>";
+        break;
+    }
+  }
   $user = $_SESSION['user_auth'];
   if ($user != '') {
       echo "Ciao $user"; ?>
@@ -23,7 +36,7 @@ if (!isset($_SESSION['user_auth'])) {
     </form>
     <?php if (isset($_REQUEST['logout'])) {
         session_destroy();
-        header('Refresh:0');
+        header('Location: index.php?message=1');
     }
   } else {
        ?>

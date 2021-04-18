@@ -47,7 +47,7 @@ $conn = access_database_byname('DB_esercizio6');
               echo "$sql";
         if ($conn->query($sql) === true) {
           $_SESSION['user_auth'] = $username;
-          header('Location: /index.php?signup=1');
+          header('Location: /index.php?message=2');
         } else {
           echo "<script type='text/javascript'>alert('Utente o email gia esistenti');</script>";
         }
