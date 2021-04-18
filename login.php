@@ -1,7 +1,8 @@
 <?php
-header('Cache-Control: no cache');
-session_cache_limiter('private_no_expire');
 session_start();
+
+// header('Cache-Control: no cache');
+// session_cache_limiter('private_no_expire');
 
 require 'access_db.php';
 
@@ -38,17 +39,17 @@ $conn = access_database_byname('DB_esercizio6');
 
           $sql = "SELECT nome_utente, password
                   FROM utenti
-                  WHERE nome_utente='$username' AND password='$password'";
+                  WHERE nome_utente='$username'";
           $result = $conn->query($sql);
           $conn->close();
 
           if ($result->num_rows > 0) {
-
               $row = $result->fetch_assoc();
-              $_SESSION['user_auth'] = $row['nome_utente'];
-              ?>
-            <p>Benvenuto <?php echo $username; ?>, <a href="index.php">torna alla home page</a></p>
-            <?php
+              if (password_verify($password, $row['password'])) {
+                  $_SESSION['user_auth'] = $username;
+                  // header('Location: index.php');
+                  echo "<p>Benvenuto $username, <a href=\"index.php\">torna alla home page</a></p>";
+              }
           } else {
               // echo '<p>Utente non trovato. <a href="/login.php">Riprova</a></p>';
               header('Location: /login.php?error=1');
@@ -86,6 +87,4 @@ $conn = access_database_byname('DB_esercizio6');
   }
   ?>
 </body>
-<?php $conn->close(); ?>
-
 </html>

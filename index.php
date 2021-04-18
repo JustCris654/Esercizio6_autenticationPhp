@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['users_auth'])) {
-    $_SESSION['users_auth'] = '';
+if (!isset($_SESSION['user_auth'])) {
+    $_SESSION['user_auth'] = '';
 }
 ?>
 
@@ -15,7 +15,7 @@ if (!isset($_SESSION['users_auth'])) {
 
 <body>
   <?php
-  $user = $_SESSION['users_auth'];
+  $user = $_SESSION['user_auth'];
   if ($user != '') {
       echo "Ciao $user"; ?>
     <form action="index.php" method="post">

@@ -9,7 +9,7 @@ $conn = access_database_byname('DB_esercizio6');
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="validateForm.js" charset="utf-8"></script>
+    <script src="validateForm.js" charset="utf-8"></script>3
     <title>Sign Up</title>
   </head>
   <body>
@@ -30,22 +30,28 @@ $conn = access_database_byname('DB_esercizio6');
       <input type="submit" name="signup" value="Sign Up">
     </form>
 
-    <?php if (isset($_REQUEST['singup'])) {
+    <?php if (isset($_REQUEST['signup'])) {
         $email = $_POST['email'];
         $username = $_POST['username'];
         $password = $_POST['password'];
-        $password_2 = $_POST['password_2'];
-
-
 
         $hashedpws = password_hash($password, PASSWORD_DEFAULT);
 
-        $date_now = date('Y-m-d H:i:s');
+        $date = date('Y-m-d H:i:s');
+        echo "$date";
+
+        echo "<p>Email: $email</p>Username: $username <p>Password: $password</p> <p>Data: $date</p>";
 
         $sql = "INSERT INTO utenti (nome_utente, password, email, data_registrazione)
-              VALUES ('$username', '$hashedpws','$email', '$date_now')";
+              VALUES ('$username', '$hashedpws','$email', '$date')";
+              echo "$sql";
         if ($conn->query($sql) === true) {
+          $_SESSION['user_auth'] = $username;
+          header('Location: /index.php?signup=1');
+        } else {
+          echo "<script type='text/javascript'>alert('Utente o email gia esistenti');</script>";
         }
+
     } ?>
   </body>
 </html>
