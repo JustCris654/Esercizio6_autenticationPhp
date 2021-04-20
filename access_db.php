@@ -1,7 +1,6 @@
 <?php
-function access_database_byname($db_name)
-{
-    $servername = 'localhost';
+function access_database_byname($db_name) {
+    $servername = '127.0.0.1';
     $username = 'root';
     $password = '';
 
